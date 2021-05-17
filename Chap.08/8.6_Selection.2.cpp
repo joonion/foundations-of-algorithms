@@ -24,7 +24,7 @@ void partition2(vector<int>& S, int low, int high, int& pivotpoint)
     vector<int> T(r + 1);
     for (int i = 1; i <= r; i++) {
         first = low + 5 * i - 5;
-        last = min(low + 5 * i - 1, low + arraysize);
+        last = min(low + 5 * i - 1, low + arraysize) - 1;
         T[i] = median(S, first, last);
     }
 
@@ -53,7 +53,7 @@ int selection2(vector<int>& S, int low, int high, int k)
         if (k == pivotpoint)
             return S[pivotpoint];
         else if (k < pivotpoint)
-            return selection2(S, low, pivotpoint -1, k);
+            return selection2(S, low, pivotpoint - 1, k);
         else // k > pivotpoint
             return selection2(S, pivotpoint + 1, high, k);
     }

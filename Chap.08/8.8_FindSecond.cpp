@@ -7,7 +7,6 @@ typedef map<int, vector<int>> map_t;
 
 int tournament(int low, int high, vector<int>& S, map_t& M)
 {
-    cout << low << " " << high << endl;
     if (low == high)
         return S[low];
     else {
@@ -16,7 +15,6 @@ int tournament(int low, int high, vector<int>& S, map_t& M)
         int right = tournament(mid + 1, high, S, M);
         int winner = left, loser = right;
         if (winner < loser) swap(winner, loser);
-        cout << "winner is " << winner << " loser is " << loser << endl;
         M.find(winner)->second.push_back(loser);
         return winner;
     }

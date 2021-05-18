@@ -3,24 +3,27 @@
 #include <queue>
 using namespace std;
 
-class DisjointSet {
-private:
-    vector<int> dset;
-public:
-    DisjointSet(int n) {
-        dset.resize(n + 1);
-        for (int i = 1; i <= n; i++)
-            dset[i] = i;
-    }
-    int find(int i) {
-        while (dset[i] != i)
-            i = dset[i];
-        return i;
-    }
-    void merge(int p, int q) {
-        dset[p] = q;
-    }
-};
+/* Begin of a simple implementation of disjoint set */
+
+vector<int> dset;
+
+void dset_init(int n) {
+    dset.resize(n + 1);
+    for (int i = 1; i <= n; i++)
+        dset[i] = i;
+}
+
+int dset_find(int i) {
+    while (dset[i] != i)
+        i = dset[i];
+    return i;
+}
+
+void dset_merge(int p, int q) {
+    dset[p] = q;
+}
+
+/* End of a simple implementation of disjoint set */
 
 typedef struct edge {
     int u, v, w;
@@ -43,13 +46,13 @@ void kruskal(int n, int m, set_of_edges& E, set_of_edges& F)
         PQ.push(e);
     F.clear();
 
-    DisjointSet disjoint_set(n);
+    dset_init(n);
     while (F.size() < n - 1) {
         edge_t e = PQ.top(); PQ.pop();
-        int p = disjoint_set.find(e.u);
-        int q = disjoint_set.find(e.v);
+        int p = dset_find(e.u);
+        int q = dset_find(e.v);
         if (p != q) {
-            disjoint_set.merge(p, q);
+            dset_merge(p, q);
             F.push_back(e);
         }
     }
@@ -71,3 +74,4 @@ int main() {
     for (edge_t e: F)
         cout << e.u << " " << e.v << " " << e.w << endl;
 }
+

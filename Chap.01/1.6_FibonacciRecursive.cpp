@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 
-int fib(int n) 
+typedef unsigned long long LongInt;
+
+LongInt fib(LongInt n) 
 {
     if (n <= 1)
         return n;
@@ -11,10 +13,7 @@ int fib(int n)
 
 int main()
 {
-    int n, T;
-    cin >> T;
-    while (T-- > 0) {
-        cin >> n;
-        cout << fib(n) << endl;
-    }
+    LongInt n;
+    cin >> n;
+    cout << fib(n);
 }

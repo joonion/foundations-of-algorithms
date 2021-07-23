@@ -6,7 +6,8 @@ using namespace std;
 void binsearch(int n, vector<int>& S, int x, int& location) 
 {
     int low, high, mid;
-    low = 1; high = n; location = 0;
+    low = 1; high = n; 
+    location = 0;
     while (low <= high && location == 0) {
         mid = (low + high) / 2;
         if (x == S[mid])
@@ -20,21 +21,12 @@ void binsearch(int n, vector<int>& S, int x, int& location)
 
 int main()
 {
-    int n, x, location, T;
+    int n, x, location;
     cin >> n;
     vector<int> S(n + 1);
     for (int i = 1; i <= n; i++)
         cin >> S[i];
-    sort(S.begin() + 1, S.end());
-    for (int i = 1; i <= n; i++)
-        if (i != n)
-            cout << S[i] << " ";
-        else 
-            cout << S[i] << endl;
-    cin >> T;
-    while (T-- > 0) {
-        cin >> x;
-        binsearch(n, S, x, location);
-        cout << location << endl;
-    }
+    cin >> x;
+    binsearch(n, S, x, location);
+    cout << location << endl;
 }

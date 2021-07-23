@@ -20,10 +20,7 @@ LongInt fib2(int n)
 
 int main()
 {
-    int n, T;
-    cin >> T;
-    while (T-- > 0) {
-        cin >> n;
-        cout << fib2(n) << endl;
-    }
+    int n;
+    cin >> n;
+    cout << fib2(n) << endl;
 }

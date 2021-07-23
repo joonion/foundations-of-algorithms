@@ -28,10 +28,9 @@ int main()
         for (int j = 1; j <= n; j++)
             cin >> B[i][j];
     matrixmult(n, A, B, C);
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++)
-            if (j != n)
-                cout << C[i][j] << " ";
-            else
-                cout << C[i][j] << endl;
+            cout << C[i][j] << " ";
+        cout << endl;
+    }
 }

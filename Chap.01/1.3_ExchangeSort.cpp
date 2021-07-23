@@ -20,8 +20,6 @@ int main()
         cin >> S[i];
     exchangesort(n, S);
     for (int i = 1; i <= n; i++)
-        if (i != n)
             cout << S[i] << " ";
-        else
-            cout << S[i] << endl;
+    cout << S[i] << endl;
 }

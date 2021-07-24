@@ -12,13 +12,16 @@ void merge2(int low, int mid, int high)
     while (i <= mid && j <= high)
         U[k++] = (S[i] < S[j]) ? S[i++] : S[j++];
     if (i > mid)
-        for (int t = j; t <= high; t++)
-            U[k++] = S[t];
+        // move S[j] through S[high] to U[k] through U[high]
+        while (j <= high)
+            U[k++] = S[j++];
     else // j > high 
-        for (int t = i; t <= mid; t++)
-            U[k++] = S[t];
-    for (int t = 0; t < U.size(); t++)
-        S[low + t] = U[t];
+        // move S[i] through S[mid] to U[k] through U[high]
+        while (i <= mid)
+            U[k++] = S[i++];
+    // move U[0] through U[high-low+1] to S[low] through S[high]
+    for (int t = low; t <= high; t++)
+        S[t] = U[t - low];
 }
 
 void mergesort2(int low, int high)
@@ -39,8 +42,6 @@ int main()
         cin >> S[i];
     mergesort2(1, n);
     for (int i = 1; i <= n; i++)
-        if (i != n) 
-            cout << S[i] << " ";
-        else 
-            cout << S[i] << endl;
+        cout << S[i] << " ";
+    cout << endl;
 }

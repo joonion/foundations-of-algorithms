@@ -8,6 +8,7 @@ vector<int> S;
 void partition(int low, int high, int& pivotpoint)
 {
     int pivotitem = S[low];
+    
     int j = low;
     for (int i = low + 1; i <= high; i++)
         if (S[i] < pivotitem) {
@@ -21,6 +22,7 @@ void partition(int low, int high, int& pivotpoint)
 void quicksort(int low, int high)
 {
     int pivotpoint;
+
     if (low < high) {
         partition(low, high, pivotpoint);
         quicksort(low, pivotpoint - 1);
@@ -36,8 +38,6 @@ int main()
         cin >> S[i];
     quicksort(1, n);
     for (int i = 1; i <= n; i++)
-        if (i != n) 
-            cout << S[i] << " ";
-        else 
-            cout << S[i] << endl;
+        cout << S[i] << " ";
+    cout << endl;
 }

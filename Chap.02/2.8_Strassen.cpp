@@ -4,14 +4,14 @@ using namespace std;
 
 typedef vector<vector<int>> matrix_t;
 
-const int threshold = 2;
+const int threshold = 4;
 
 // global variables
 matrix_t A11, A12, A21, A22;
 matrix_t B11, B12, B21, B22;
 matrix_t C11, C12, C21, C22;
-matrix_t L, R;
 matrix_t M1, M2, M3, M4, M5, M6, M7;
+matrix_t L, R;
 
 void print_matrix(int n, matrix_t& M)
 {
@@ -40,21 +40,11 @@ void init_matrices(int n) {
     M2.resize(m, vector<int>(m));
     M3.resize(m, vector<int>(m));
     M4.resize(m, vector<int>(m));
+    M5.resize(m, vector<int>(m));
     M6.resize(m, vector<int>(m));
     M7.resize(m, vector<int>(m));
     L.resize(m, vector<int>(m));
     R.resize(m, vector<int>(m));
-}
-
-
-void mmult(int n, matrix_t& A, matrix_t& B, matrix_t &C)
-{
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++) {
-            C[i][j] = 0;
-            for (int k = 0; k < n; k++)
-                C[i][j] += A[i][k] * B[k][j];
-        }
 }
 
 void madd(int n, matrix_t& A, matrix_t& B, matrix_t& C)
@@ -69,6 +59,16 @@ void msub(int n, matrix_t& A, matrix_t& B, matrix_t& C)
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             C[i][j] = A[i][j] - B[i][j];
+}
+
+void mmult(int n, matrix_t& A, matrix_t& B, matrix_t &C)
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            C[i][j] = 0;
+            for (int k = 0; k < n; k++)
+                C[i][j] += A[i][k] * B[k][j];
+        }
 }
 
 void partition(int m, matrix_t& M, 
@@ -112,9 +112,6 @@ void strassen(int n, matrix_t& A, matrix_t& B, matrix_t &C)
         strassen(m, L, B11, M2);
         msub(m, B12, B22, R);
         strassen(m, A11, R, M3);
-        if (m >= 2) {
-            print_matrix(m, M3);
-        }        
         msub(m, B21, B11, R);
         strassen(m, A22, R, M4);
         madd(m, A11, A12, L);
@@ -122,7 +119,6 @@ void strassen(int n, matrix_t& A, matrix_t& B, matrix_t &C)
         msub(m, A21, A11, L);
         madd(m, B11, B12, R);
         strassen(m, L, R, M6);
-
         msub(m, A12, A22, L);
         madd(m, B21, B22, R);
         strassen(m, L, R, M7);
@@ -137,9 +133,6 @@ void strassen(int n, matrix_t& A, matrix_t& B, matrix_t &C)
         madd(m, R,  M6, C22);
 
         combine(m, C, C11, C12, C21, C22);
-        if (m >= 2) {
-            print_matrix(2 * m, C);
-        }
     }
 }
 

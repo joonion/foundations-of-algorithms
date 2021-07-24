@@ -3,6 +3,7 @@
 #include <algorithm>
 using namespace std;
 
+// global variables
 int n, x;
 vector<int> S;
 

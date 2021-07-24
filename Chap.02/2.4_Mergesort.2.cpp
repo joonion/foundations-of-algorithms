@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+// global varaibles
 int n;
 vector<int> S;
 

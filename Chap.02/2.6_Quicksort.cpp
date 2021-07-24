@@ -2,13 +2,14 @@
 #include <vector>
 using namespace std;
 
+// global variables
 int n;
 vector<int> S;
 
 void partition(int low, int high, int& pivotpoint)
 {
     int pivotitem = S[low];
-    
+
     int j = low;
     for (int i = low + 1; i <= high; i++)
         if (S[i] < pivotitem) {

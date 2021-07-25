@@ -24,6 +24,13 @@ void assign_value(large_integer& u, string s)
         u.push_back(s[i] - '0');
 }
 
+bool is_zero(large_integer& u)
+{
+    if (u.size() == 1 && u[0] == 0)
+        return true;
+    return false;
+}
+
 void roundup_carry(large_integer& a)
 {
     int carry = 0;
@@ -59,29 +66,39 @@ void lmult(large_integer& a, large_integer& b, large_integer& c)
 
 void pow_by_exp(large_integer& u, int m, large_integer &v)
 {
-    v.resize(u.size() + m);
-    for (int i = 0; i < m; i++)
-        v[i] = 0;
-    copy(u.begin(), u.end(), v.begin() + m);
+    if (is_zero(u)) {
+        v.resize(1); v[0] = 0;
+    }
+    else {
+        v.resize(u.size() + m);
+        fill(v.begin(), v.end(), 0);
+        copy(u.begin(), u.end(), v.begin() + m);
+    }
 }
 
 void div_by_exp(large_integer& u, int m, large_integer &v)
 {
-    v.resize(u.size() - m);
-    copy(u.begin() + m, u.end(), v.begin());
+    if (is_zero(u) || u.size() <= m) {
+        v.resize(1); v[0] = 0;
+    }
+    else {
+        v.resize(u.size() - m);
+        copy(u.begin() + m, u.end(), v.begin());
+    }
 }
 
 void rem_by_exp(large_integer& u, int m, large_integer &v)
 {
-    v.resize(m);
-    copy(u.begin(), u.begin() + m, v.begin());
-}
-
-bool is_zero(large_integer& u)
-{
-    if (u.size() == 1 && u[0] == 0)
-        return true;
-    return false;
+    if (is_zero(u)) {
+        v.resize(1); v[0] = 0;
+    }
+    else {
+        v.resize(m);
+        copy(u.begin(), u.begin() + m, v.begin());
+        // remove leading zeros
+        while (v.size() > 1 && v.back() == 0)
+            v.pop_back();
+    }
 }
 
 void prod(large_integer& u, large_integer& v, large_integer &r)
@@ -91,14 +108,15 @@ void prod(large_integer& u, large_integer& v, large_integer &r)
 
     int n = max(u.size(), v.size());
     if (is_zero(u) || is_zero(v)) {
-        r.resize(1);
-        r[0] = 0;
+        r.resize(1); r[0] = 0;
     }
-    else if (n <= threshold)
+    else if (min(u.size(), v.size()) <= threshold)
         lmult(u, v, r);
     else {
         int m = n / 2;
         div_by_exp(u, m, x); rem_by_exp(u, m, y);
+        print_large_integer(x);
+        print_large_integer(y);        
         div_by_exp(v, m, w); rem_by_exp(v, m, z);
         // t2 <- prod(x,w) * 10^(2*m)
         prod(x, w, t1); pow_by_exp(t1, 2 * m, t2); 
@@ -122,6 +140,3 @@ int main()
     prod(u, v, r);
     print_large_integer(r);
 }
-
-
-

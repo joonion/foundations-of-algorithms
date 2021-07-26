@@ -8,10 +8,11 @@ typedef vector<vector<int>> matrix_t;
 
 void print_matrix(int n, matrix_t& M)
 {
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++)
-            if (j != n) cout << M[i][j] << " ";
-            else cout << M[i][j] << endl;
+            cout << M[i][j] << " ";
+        cout << endl;
+    }
 }
 
 void order(int i, int j, matrix_t& P, string& s)
@@ -63,12 +64,12 @@ int main()
     M.resize(n + 1, vector<int>(n + 1, 0));
     P.resize(n + 1, vector<int>(n + 1, 0));
     minmult(n, d, M, P);
-    cout << M[1][n] << endl;
-    string s;
-    order(1, n, P, s);
-    cout << s << endl;
     cout << "M =" << endl;
     print_matrix(n, M);
     cout << "P =" << endl;
     print_matrix(n, P);
+    cout << M[1][n] << endl;
+    string s;
+    order(1, n, P, s);
+    cout << s << endl;
 }

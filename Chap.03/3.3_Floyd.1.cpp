@@ -6,8 +6,11 @@ using namespace std;
 
 typedef vector<vector<int>> matrix_t;
 
-void floyd(int n, matrix_t& D)
+void floyd(int n, matrix_t& W, matrix_t& D)
 {
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++)
+            D[i][j] = W[i][j];
     for (int k = 1; k <= n; k++)
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
@@ -25,11 +28,12 @@ int main()
         W[i][i] = D[i][i] = 0;
     while (m-- > 0) {
         cin >> u >> v >> w;
-        W[u][v] = D[u][v] = w;
+        W[u][v] = w;
     }
-    floyd(n, D);
-    for (int i = 1; i <= n; i++)
+    floyd(n, W, D);
+    for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++)
-            if (j != n) cout << D[i][j] << " ";
-            else cout << D[i][j] << endl;
+            cout << D[i][j] << " ";
+        cout << endl;
+    }
 }

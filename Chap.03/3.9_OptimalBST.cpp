@@ -7,10 +7,27 @@ using namespace std;
 typedef struct node *node_ptr;
 typedef struct node {
     int key;
-    node_ptr left, right;
+    node_ptr left;
+    node_ptr right;
 } node_t;
 
 typedef vector<vector<int>> matrix_t;
+
+void search(node_ptr tree, int keyin, node_ptr& p)
+{
+    bool found;
+
+    p = tree;
+    found = false;
+    while (!found) {
+        if (p->key == keyin) 
+            found = true;
+        else if (keyin < p->key)
+            p = p->left;
+        else //  keyin > p->key
+            p = p->right;
+    }
+}
 
 void print_matrix(int n, matrix_t& M)
 {

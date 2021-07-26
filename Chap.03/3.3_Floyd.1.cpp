@@ -21,11 +21,10 @@ int main()
 {
     int n, m, u, v, w;
     cin >> n >> m;
-    matrix_t W, D;
-    W.resize(n + 1, vector<int>(n + 1, INF));
-    D.resize(n + 1, vector<int>(n + 1, INF));
+    matrix_t W(n + 1, vector<int>(n + 1, INF));
+    matrix_t D(n + 1, vector<int>(n + 1, INF));
     for (int i = 1; i <= n; i++)
-        W[i][i] = D[i][i] = 0;
+        W[i][i] = 0;
     while (m-- > 0) {
         cin >> u >> v >> w;
         W[u][v] = w;

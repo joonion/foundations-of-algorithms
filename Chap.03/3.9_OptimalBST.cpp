@@ -94,15 +94,16 @@ int minimum(int i, int j, int& mink, vector<int>& p, matrix_t& A)
 
 void optsearchtree(int n, vector<int>& p, matrix_t& A, matrix_t& R)
 {
-    for (int i = 1; i <= n; i++) {
+    int i, j, k, diagonal;
+    for (i = 1; i <= n; i++) {
         A[i][i - 1] = 0; A[i][i] = p[i];
         R[i][i - 1] = 0; R[i][i] = i;
     }
     A[n + 1][n] = R[n + 1][n] = 0;
 
-    for (int diagonal = 1; diagonal <= n - 1; diagonal++)
-        for (int i = 1; i <= n - diagonal; i++) {
-            int j = i + diagonal, k;
+    for (diagonal = 1; diagonal <= n - 1; diagonal++)
+        for (i = 1; i <= n - diagonal; i++) {
+            j = i + diagonal;
             A[i][j] = minimum(i, j, k, p, A);
             R[i][j] = k;
         }

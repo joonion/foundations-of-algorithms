@@ -7,28 +7,33 @@ using namespace std;
 
 typedef vector<vector<int>> matrix_t;
 typedef vector<pair<int, int>> set_of_edges;
+typedef pair<int, int> edge_t;
 
 void prim(int n, matrix_t& W, set_of_edges& F)
 {
     int vnear, min;
-    vector<int> nearest(n + 1), dist(n + 1);
-    F.clear();
+    vector<int> nearest(n + 1), distance(n + 1);
+
+    F.clear(); // 𝐹=∅;
     for (int i = 2; i <= n; i++) {
         nearest[i] = 1;
-        dist[i] = W[1][i];
+        distance[i] = W[1][i];
     }
+
     for (int t = 1; t <= n - 1; t++) {
         min = INF;
         for (int i = 2; i <= n; i++)
-            if (0 <= dist[i] && dist[i] < min) {
-                min = dist[i];
+            if (0 <= distance[i] && distance[i] < min) {
+                min = distance[i];
                 vnear = i;
             }
+        // e = edge connecting vertices indexed by vnear and nearest[vnear];
+        // add e to F;
         F.push_back(make_pair(vnear, nearest[vnear]));
-        dist[vnear] = -1;
+        distance[vnear] = -1;
         for (int i = 2; i <= n; i++)
-            if (dist[i] > W[i][vnear]) {
-                dist[i] = W[i][vnear];
+            if (distance[i] > W[i][vnear]) {
+                distance[i] = W[i][vnear];
                 nearest[i] = vnear;
             }
     }
@@ -47,6 +52,8 @@ int main() {
 
     set_of_edges F;
     prim(n, W, F);
-    for (auto e: F)
-        cout << e.first << " " << e.second << " " << W[e.first][e.second] << endl;
+    for (edge_t e: F) {
+        u = e.first; v = e.second;
+        cout << u << " " << v << " " << W[u][v] << endl;
+    }
 }

@@ -41,16 +41,20 @@ typedef priority_queue<edge_t, vector<edge_t>, edge_compare> PriorityQueue;
 
 void kruskal(int n, int m, set_of_edges& E, set_of_edges& F)
 {
+    int p, q;
+    edge_t e;
     PriorityQueue PQ;
+
+    // sort the m edges in E by weight in nondecreasing order;
     for (edge_t e: E)
         PQ.push(e);
-    F.clear();
 
+    F.clear(); // 𝐹=∅;
     dset_init(n);
     while (F.size() < n - 1) {
-        edge_t e = PQ.top(); PQ.pop();
-        int p = dset_find(e.u);
-        int q = dset_find(e.v);
+        e = PQ.top(); PQ.pop();
+        p = dset_find(e.u);
+        q = dset_find(e.v);
         if (p != q) {
             dset_merge(p, q);
             F.push_back(e);

@@ -23,7 +23,11 @@ void dijkstra(int n, matrix_t& W, set_of_edges& F)
                 min = length[i];
                 vnear = i;
             }
+        
+        // e = edge from vertex indexed by touch[vnear];
+        // add e to F;
         F.push_back(make_pair(touch[vnear], vnear));
+
         for (int i = 2; i <= n; i++)
             if (length[i] > length[vnear] + W[vnear][i]) {
                 length[i] = length[vnear] + W[vnear][i];

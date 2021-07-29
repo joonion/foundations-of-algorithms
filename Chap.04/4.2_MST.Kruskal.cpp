@@ -52,12 +52,12 @@ void kruskal(int n, int m, set_of_edges& E, set_of_edges& F)
     F.clear(); // 𝐹=∅;
     dset_init(n);
     while (F.size() < n - 1) {
-        e = PQ.top(); PQ.pop();
+        e = PQ.top(); PQ.pop(); // edge with least weight not yet considered;
         p = dset_find(e.u);
         q = dset_find(e.v);
         if (p != q) {
             dset_merge(p, q);
-            F.push_back(e);
+            F.push_back(e); // add e to F
         }
     }
 }

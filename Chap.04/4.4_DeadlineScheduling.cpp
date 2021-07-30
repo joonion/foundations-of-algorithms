@@ -28,6 +28,7 @@ void schedule(int n, sequence_of_integer& deadline, sequence_of_integer &J) {
         K.insert(K.begin() + j, i);
 
         if (is_feasible(K, deadline)) {
+            // J = K
             J.resize(K.size());
             copy(K.begin(), K.end(), J.begin());
         }

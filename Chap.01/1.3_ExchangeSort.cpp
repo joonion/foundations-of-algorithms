@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <utility>
 using namespace std;
 
 void exchangesort(int n, vector<int>& S) 
@@ -21,5 +21,5 @@ int main()
     exchangesort(n, S);
     for (int i = 1; i <= n; i++)
             cout << S[i] << " ";
-    cout << S[i] << endl;
+    cout << endl;
 }

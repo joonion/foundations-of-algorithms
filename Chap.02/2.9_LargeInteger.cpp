@@ -21,7 +21,7 @@ void make_large_integer(string s, LargeInteger& v) {
 }
 
 void remove_leading_zeros(LargeInteger& v) {
-    while (v.back() == 0)
+    while (v.size() != 0 && v.back() == 0)
         v.pop_back();
 }
 

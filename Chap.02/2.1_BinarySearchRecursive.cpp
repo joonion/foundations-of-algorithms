@@ -24,8 +24,7 @@ int binsearch2(int low, int high)
     }
 }
 
-int main()
-{
+int main() {
     int location;
     cin >> n;
     S.resize(n + 1);

@@ -70,9 +70,9 @@ void preorder(node_ptr node, vector<int>& v)
 void inorder(node_ptr node, vector<int>& v)
 {
     if (node != NULL) {
-        preorder(node->left, v);
+        inorder(node->left, v);
         v.push_back(node->key);
-        preorder(node->right, v);
+        inorder(node->right, v);
     }
 }
 
